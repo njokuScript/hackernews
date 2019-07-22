@@ -22,19 +22,30 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: list
+      list,
+      searchTerm: ""
     };
     this.onDismiss = this.onDismiss.bind(this);
+    this.onSearchChange = this.onSearchChange.bind(this)
   }
-  onDismiss(id) {
+  //search function
+  onSearchChange(event) {
+    this.setState({ searchTerm: event.target.value });
+  }
+  //delete function
+  onDismiss = id => {
     const isNotId = item => item.objectID !== id;
     const updatedList = this.state.list.filter(isNotId);
     this.setState({ list: updatedList });
-  }
+  };
 
   render() {
     return (
+      //outputing the value of array of an object
       <div className="App">
+        <form>
+          <input type="text" onChange={this.onSearchChange} />
+        </form>
         {this.state.list.map(item => {
           return (
             <div key={item.objectID}>
