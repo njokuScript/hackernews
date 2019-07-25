@@ -3,6 +3,12 @@ import "./App.css";
 import Search from "./components/Search";
 import Table from "./components/Table";
 
+const DEFAULT_QUERY = "redux";
+const PATH_BASE = "https://hn.algolia.com/api/v1";
+const PATH_SEARCH = "/search";
+const PARAM_SEARCH = "/query=";
+const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}`;
+
 const list = [
   {
     title: "React",
@@ -27,14 +33,24 @@ class App extends Component {
     super(props);
 
     this.state = {
-      list,
-      searchTerm: ""
+      result: "null",
+      searchTerm: DEFAULT_QUERY
     };
-
+    this.setSearchTopStories = this.setSearchTopStories.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
   }
+  setSearchTopStories(result) {
+    this.setState({ result });
+  }
+  componentDidMount() {
+    const { searchTerm } = this.state;
 
+    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
+      .then(response => response.json())
+      .then(result => this.setSearchTopStories(result))
+      .catch(error => error);
+  }
   onSearchChange(event) {
     this.setState({ searchTerm: event.target.value });
   }

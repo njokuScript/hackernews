@@ -26,7 +26,7 @@ const Table = ({ list, pattern, onDismiss }) => (
         <span style={smallColumn}>{item.points}</span>
         <span style={smallColumn}>
           <Button
-            onClick={() => this.onDismiss(item.objectID)}
+            onClick={() => onDismiss(item.objectID)}
             type="button"
             className="button-inline"
           >
