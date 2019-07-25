@@ -8,21 +8,6 @@ const PATH_BASE = "https://hn.algolia.com/api/v1";
 const PATH_SEARCH = "/search";
 const PARAM_SEARCH = "query=";
 
-const largeColumn = {
-  width: "40%"
-};
-
-const midColumn = {
-  width: "30%"
-};
-
-const smallColumn = {
-  width: "10%"
-};
-
-const isSearched = searchTerm => item =>
-  item.title.toLowerCase().includes(searchTerm.toLowerCase());
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -56,7 +41,7 @@ class App extends Component {
 
   onDismiss(id) {
     const isNotId = item => item.objectID !== id;
-    const updatedList = this.state.list.filter(isNotId);
+    const updatedList = this.state.result.hits.filter(isNotId);
     this.setState({ list: updatedList });
   }
 
