@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Thu Jul 25 2019 11:35:35 GMT+0100 (West Africa Standard Time)
+------------------------------------------------------
+
+Modified files:
+* src/App.js
+* src/components/Table.js
+
+
+Created files:
+
+
+Deleted files:
+
+
+Renamed files:

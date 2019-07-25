@@ -16,7 +16,11 @@ const smallColumn = {
 };
 const Table = ({ list, pattern, onDismiss }) => (
   <div className="table">
+     if(!result){
+        return null
+      }
     {list.filter(isSearched(pattern)).map(item => (
+     
       <div key={item.objectID} className="table-row">
         <span style={largeColumn}>
           <a href={item.url}>{item.title}</a>
@@ -27,7 +31,6 @@ const Table = ({ list, pattern, onDismiss }) => (
         <span style={smallColumn}>
           <Button
             onClick={() => onDismiss(item.objectID)}
-            type="button"
             className="button-inline"
           >
             Dismiss
@@ -37,4 +40,5 @@ const Table = ({ list, pattern, onDismiss }) => (
     ))}
   </div>
 );
+
 export default Table;
