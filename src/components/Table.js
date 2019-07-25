@@ -14,13 +14,10 @@ const midColumn = {
 const smallColumn = {
   width: "30%"
 };
+
 const Table = ({ list, pattern, onDismiss }) => (
   <div className="table">
-     if(!result){
-        return null
-      }
     {list.filter(isSearched(pattern)).map(item => (
-     
       <div key={item.objectID} className="table-row">
         <span style={largeColumn}>
           <a href={item.url}>{item.title}</a>

@@ -2,26 +2,45 @@ import React, { Component } from "react";
 import "./App.css";
 import Search from "./components/Search";
 import Table from "./components/Table";
-
 const DEFAULT_QUERY = "redux";
+
 const PATH_BASE = "https://hn.algolia.com/api/v1";
 const PATH_SEARCH = "/search";
-const PARAM_SEARCH = "/query=";
+const PARAM_SEARCH = "query=";
+
+const largeColumn = {
+  width: "40%"
+};
+
+const midColumn = {
+  width: "30%"
+};
+
+const smallColumn = {
+  width: "10%"
+};
+
+const isSearched = searchTerm => item =>
+  item.title.toLowerCase().includes(searchTerm.toLowerCase());
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      result: "null",
+      result: null,
       searchTerm: DEFAULT_QUERY
     };
+
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
   }
+
   setSearchTopStories(result) {
     this.setState({ result });
   }
+
   componentDidMount() {
     const { searchTerm } = this.state;
 
@@ -30,6 +49,7 @@ class App extends Component {
       .then(result => this.setSearchTopStories(result))
       .catch(error => error);
   }
+
   onSearchChange(event) {
     this.setState({ searchTerm: event.target.value });
   }
@@ -39,16 +59,19 @@ class App extends Component {
     const updatedList = this.state.list.filter(isNotId);
     this.setState({ list: updatedList });
   }
+
   render() {
     const { searchTerm, result } = this.state;
+
     if (!result) {
       return null;
     }
+
     return (
       <div className="page">
         <div className="interactions">
           <Search value={searchTerm} onChange={this.onSearchChange}>
-            search
+            Search
           </Search>
         </div>
         <Table
